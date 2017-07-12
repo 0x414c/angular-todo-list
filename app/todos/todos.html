@@ -1,0 +1,13 @@
+<div ng-controller="ShowTodosViewCtrl">
+  <div ng-switch="todos.length">
+    <span ng-switch-when="0">No TODOs yet...</span>
+    <span ng-switch-default>{{remaining()}} of {{todos.length}} remaining</span>
+  </div>
+
+  <ul class="unstyled">
+    <li ng-repeat="todo in todos">
+      <input type="checkbox" ng-model="todo.done">
+      <span class="done-{{todo.done}}">{{todo.text}}</span>
+    </li>
+  </ul>
+</div>
