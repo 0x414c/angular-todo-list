@@ -15,7 +15,7 @@
     <div class="col-md-12">
       <table class="table table-striped table-hover table-condensed">
         <tbody>
-        <tr ng-repeat="todo in todos" ng-class="{'success': todo.done}">
+        <tr ng-repeat="todo in todos" ng-class="{'success': todo.done, 'warning': shouldNotify(todo)}">
           <td><input type="checkbox" ng-model="todo.done"></td>
           <td><span class="done-{{todo.done}}">{{todo.text}}</span></td>
         </tr>
