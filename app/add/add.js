@@ -18,7 +18,6 @@ angular.module('myApp.add', ['ngRoute'])
            $scope.dueDateTime;
   };
 
-  // TODO: [2;1] Return to `todos' view after saving.
   $scope.addTodo = function() {
     $scope.todos.push({text: $scope.todoText, done: false, dueDateTime: moment($scope.dueDateTime)});
     $scope.todoText = '';
