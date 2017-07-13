@@ -1,6 +1,16 @@
 <div ng-controller="AddTodoViewCtrl">
-  <form ng-submit="addTodo()">
-    <input type="text" ng-model="todoText" size="30" placeholder="Task summary">
-    <input class="btn-primary" type="submit" value="Save">
-  </form>
+  <div class="row">
+    <div class="col-md-12">
+      <form ng-submit="addTodo()">
+        <div class="form-group">
+          <label for="todoTextInput">Task</label>
+          <input type="text" class="form-control" id="todoTextInput" ng-model="todoText" size="30"
+                 placeholder="Task summary">
+        </div>
+
+        <a class="btn btn-default" href="#!/todos" role="button">Cancel</a>
+        <input class="btn btn-success" type="submit" value="Save" ng-disabled="!(todoText.length > 0)">
+      </form>
+    </div>
+  </div>
 </div>
