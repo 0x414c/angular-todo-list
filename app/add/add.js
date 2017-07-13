@@ -12,9 +12,15 @@ angular.module('myApp.add', ['ngRoute'])
 .controller('AddTodoViewCtrl', ['$scope', '$location', function($scope, $location) {
   $scope.todos = loadTodos();
 
+  // TODO: [1;0] Use `form.input.$valid'?
+  $scope.validate = function () {
+    return $scope.todoText && $scope.todoText.length > 0 &&
+           $scope.dueDateTime;
+  };
+
   // TODO: [2;1] Return to `todos' view after saving.
   $scope.addTodo = function() {
-    $scope.todos.push({text:$scope.todoText, done:false});
+    $scope.todos.push({text: $scope.todoText, done: false, dueDateTime: moment($scope.dueDateTime)});
     $scope.todoText = '';
 
     saveTodos($scope.todos);
