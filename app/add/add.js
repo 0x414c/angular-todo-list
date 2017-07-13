@@ -9,7 +9,7 @@ angular.module('myApp.add', ['ngRoute'])
   });
 }])
 
-.controller('AddTodoViewCtrl', ['$scope', function($scope) {
+.controller('AddTodoViewCtrl', ['$scope', '$location', function($scope, $location) {
   $scope.todos = loadTodos();
 
   // TODO: [2;1] Return to `todos' view after saving.
@@ -18,5 +18,8 @@ angular.module('myApp.add', ['ngRoute'])
     $scope.todoText = '';
 
     saveTodos($scope.todos);
+
+    // TODO: [1;2] Use `angular-ui-router'?
+    $location.path('todos');
   };
 }]);
