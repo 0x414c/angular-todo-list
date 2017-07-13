@@ -9,7 +9,17 @@ angular.module('myApp.todos', ['ngRoute'])
   });
 }])
 
-.controller('ShowTodosViewCtrl', ['$scope', function($scope) {
+.filter('search', function($filter) {
+  return function(input, searchQuery) {
+    if (searchQuery) {
+      return $filter('filter')(input, {text: searchQuery});
+    } else {
+      return input;
+    }
+  };
+})
+
+.controller('ShowTodosViewCtrl', ['$scope', 'searchFilter', function($scope, searchFilter) {
   $scope.todos = loadTodos();
 
   $scope.remaining = function() {
@@ -37,8 +47,6 @@ angular.module('myApp.todos', ['ngRoute'])
 
     if (todo.dueDateTime) {
       var now = moment();
-
-      // console.log(now, todo.dueDateTime, now.diff(todo.dueDateTime, 'days', true));
 
       return Math.abs(now.diff(todo.dueDateTime, 'days', true)) < DAYS_BEFORE_NOTIFICATION;
     } else {
