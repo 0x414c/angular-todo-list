@@ -1,25 +1,18 @@
 /* app css stylesheet */
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+.inline-block {
+  display: inline-block;
 }
 
-.menu:before {
-  content: "[";
+.align-baseline {
+  vertical-align: baseline;
 }
 
-.menu:after {
-  content: "]";
+.btn-xlg {
+  font-size: 48px;
 }
 
-.menu > li {
-  display: inline;
-}
-
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+.btn-iconic {
+  line-height: 0;
+  padding: 0;
 }
