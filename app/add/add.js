@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.add', ['ngRoute'])
+angular.module('myApp.add', [
+  'ngRoute',
+  'ngStorage'
+])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/add', {
@@ -9,8 +12,13 @@ angular.module('myApp.add', ['ngRoute'])
   });
 }])
 
-.controller('AddTodoViewCtrl', ['$scope', '$location', function($scope, $location) {
-  $scope.todos = loadTodos();
+.controller('AddTodoViewCtrl', [
+  '$scope', '$location', '$localStorage',
+  function($scope, $location, $localStorage)
+{
+  $scope.$storage = $localStorage.$default({
+    todos: []
+  });
 
   // TODO: [1;0] Use `form.input.$valid'?
   $scope.validate = function () {
@@ -19,12 +27,12 @@ angular.module('myApp.add', ['ngRoute'])
   };
 
   $scope.addTodo = function() {
-    $scope.todos.push({text: $scope.todoText, done: false, dueDateTime: moment($scope.dueDateTime)});
-    $scope.todoText = '';
+    $scope.$storage.todos.push({text: $scope.todoText, done: false, dueDateTime: moment($scope.dueDateTime)});
 
-    saveTodos($scope.todos);
+    // NOTE: See `https://github.com/gsklee/ngStorage/issues/124'.
+    $localStorage.$apply();
 
     // TODO: [1;2] Use `angular-ui-router'?
-    $location.path('todos');
+    $location.path('/todos');
   };
 }]);

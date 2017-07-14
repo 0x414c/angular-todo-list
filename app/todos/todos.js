@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.todos', ['ngRoute'])
+angular.module('myApp.todos', [
+  'ngRoute',
+  'ngStorage'
+])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/todos', {
@@ -19,24 +22,30 @@ angular.module('myApp.todos', ['ngRoute'])
   };
 })
 
-.controller('ShowTodosViewCtrl', ['$scope', 'searchFilter', function($scope, searchFilter) {
-  $scope.todos = loadTodos();
+.controller('ShowTodosViewCtrl', [
+  '$scope', '$localStorage', 'searchFilter',
+  function($scope, $localStorage, searchFilter)
+{
+  $scope.$storage = $localStorage.$default({
+    todos: []
+  });
 
   $scope.remaining = function() {
     var count = 0;
-    angular.forEach($scope.todos, function(todo) {
+    angular.forEach($scope.$storage.todos, function(todo) {
       count += todo.done ? 0 : 1;
     });
 
     return count;
   };
 
+  // TODO: [0;0] Use key->value (id->todo) storage?
   $scope.done = function() {
-    var oldTodos = $scope.todos;
-    $scope.todos = [];
+    var oldTodos = $scope.$storage.todos;
+    $scope.$storage.todos = [];
     angular.forEach(oldTodos, function(todo) {
       if (!todo.done) {
-        $scope.todos.push(todo);
+        $scope.$storage.todos.push(todo);
       }
     });
   };
