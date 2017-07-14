@@ -7,7 +7,7 @@ angular.module('myApp.add', [
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/add', {
-    templateUrl: 'add/add.html',
+    templateUrl: 'views/add/add.html',
     controller: 'AddTodoViewCtrl'
   });
 }])

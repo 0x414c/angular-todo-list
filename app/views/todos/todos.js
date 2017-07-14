@@ -7,7 +7,7 @@ angular.module('myApp.todos', [
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/todos', {
-    templateUrl: 'todos/todos.html',
+    templateUrl: 'views/todos/todos.html',
     controller: 'ShowTodosViewCtrl'
   });
 }])
