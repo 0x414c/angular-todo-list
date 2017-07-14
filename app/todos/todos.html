@@ -14,7 +14,7 @@
       <p ng-switch="$storage.todos.length">
         <span ng-switch-when="0">No tasks added yet...</span>
         <!--TODO: [1;1] Get rid of case like `N of N remaining'-->
-        <span ng-switch-default>You have {{remaining()}} tasks of {{todos.length}} remaining</span>
+        <span ng-switch-default>You have {{remaining()}} tasks of {{$storage.todos.length}} remaining</span>
       </p>
     </div>
   </div>
