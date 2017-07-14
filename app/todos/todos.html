@@ -1,15 +1,17 @@
 <div ng-controller="ShowTodosViewCtrl">
-  <div class="row">
-    <div class="col-md-12">
-      <input class="form-control" ng-model="searchQuery" type="text" size="32" placeholder="Search tasks...">
+  <fieldset ng-disabled="!($storage.todos.length > 0)">
+    <div class="row">
+      <div class="col-md-12">
+        <input class="form-control" ng-model="searchQuery" type="text" size="32" placeholder="Search tasks...">
+      </div>
     </div>
-  </div>
+  </fieldset>
 
   <div class="row">
     <div class="col-md-12">
       <h4>Tasks</h4>
 
-      <p ng-switch="todos.length">
+      <p ng-switch="$storage.todos.length">
         <span ng-switch-when="0">No tasks added yet...</span>
         <!--TODO: [1;1] Get rid of case like `N of N remaining'-->
         <span ng-switch-default>You have {{remaining()}} tasks of {{todos.length}} remaining</span>
@@ -19,12 +21,12 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div ng-switch="(todos | search: searchQuery).length">
+      <div ng-if="$storage.todos.length > 0" ng-switch="($storage.todos | search: searchQuery).length">
         <p ng-switch-when="0">(no search results for query "{{searchQuery}}")</p>
 
         <table class="table table-striped table-hover table-condensed" ng-switch-default>
           <tbody>
-          <tr ng-repeat="todo in todos | search: searchQuery"
+          <tr ng-repeat="todo in $storage.todos | search: searchQuery"
               ng-class="{'success': todo.done, 'warning': shouldNotify(todo)}">
             <td>
               <input type="checkbox" ng-model="todo.done">
@@ -39,8 +41,8 @@
 
   <div class="row">
     <div class="col-md-12">
-      <a class="btn btn-success" ng-if="todos.length - remaining() > 0" ng-click="done()" href="">
-        Done <span class="badge">{{todos.length - remaining()}}</span>
+      <a class="btn btn-success" ng-if="$storage.todos.length - remaining() > 0" ng-click="done()" href="">
+        Done <span class="badge">{{$storage.todos.length - remaining()}}</span>
       </a>
     </div>
   </div>
